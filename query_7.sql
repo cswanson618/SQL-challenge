@@ -27,3 +27,23 @@ INNER JOIN rental USING (inventory_id)
 GROUP BY title ORDER BY `count(*)` desc;
 
 -- 7F
+
+SELECT SUM(amount), address FROM store S
+INNER JOIN payment P ON S.manager_staff_id = P.staff_id
+INNER JOIN address USING (address_id)
+GROUP BY address;
+
+-- 7G
+SELECT store_id, city, country from store
+INNER JOIN address USING (address_id)
+INNER JOIN city USING (city_id)
+INNER JOIN country USING (country_id);
+
+-- 7H
+SELECT SUM(amount), name FROM payment
+INNER JOIN rental USING (rental_id)
+INNER JOIN inventory USING (inventory_id)
+INNER JOIN film_category USING (film_id)
+INNER JOIN category USING (category_id)
+GROUP BY name ORDER BY `SUM(amount)` desc
+LIMIT 5;
